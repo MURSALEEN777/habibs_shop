@@ -443,6 +443,13 @@ function sendCheckoutWhatsAppMessage(formData) {
     }, 1000);
 }
 
+// Clear Filters
+function clearFilters() {
+    document.getElementById('categoryFilter').value = '';
+    document.getElementById('sortFilter').value = 'name';
+    displayProducts();
+}
+
 // Filters
 const categoryFilter = document.getElementById('categoryFilter');
 const sortFilter = document.getElementById('sortFilter');
@@ -470,6 +477,12 @@ if (categoryFilter || sortFilter) {
         }
         
         displayProducts(filtered);
+        
+        // Update products count
+        const productsCount = document.getElementById('productsCount');
+        if (productsCount) {
+            productsCount.textContent = filtered.length;
+        }
     }
     
     if (categoryFilter) categoryFilter.addEventListener('change', applyFilters);
@@ -562,4 +575,10 @@ document.addEventListener('DOMContentLoaded', () => {
     displayFeaturedProducts();
     displayCart();
     displayCheckoutSummary();
+    
+    // Update products count on shop page
+    const productsCount = document.getElementById('productsCount');
+    if (productsCount) {
+        productsCount.textContent = products.length;
+    }
 });
