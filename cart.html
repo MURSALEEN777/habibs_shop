@@ -5,7 +5,38 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cart — Habib Shop</title>
   <style>
-    body { background:#111; color:#fff; font-family:Arial, sans-serif; margin:0; padding:20px }
+    body { 
+        background:#111; 
+        color:#fff; 
+        font-family:Arial, sans-serif; 
+        margin:0; 
+        padding:20px;
+    }
+    
+    /* NAVIGATION */
+    nav {
+        background: #222;
+        padding: 15px 0;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        margin: -20px -20px 20px -20px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        color: orange;
+    }
+    
     h1{ text-align:center }
     .items{max-width:720px;margin:16px auto;display:flex;flex-direction:column;gap:12px}
     .item{background:#1b1b1b;padding:12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
@@ -17,6 +48,14 @@
   </style>
 </head>
 <body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="brand.html">Brand</a>
+  </nav>
 
   <h1>Your Cart</h1>
 
