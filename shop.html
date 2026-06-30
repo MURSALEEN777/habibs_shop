@@ -5,7 +5,35 @@
 <title>Shop</title>
 
 <style>
-body { font-family: Arial; background:#111; color:white; }
+body { 
+    margin: 0;
+    font-family: Arial; 
+    background:#111; 
+    color:white;
+}
+
+/* NAVIGATION */
+nav {
+    background: #222;
+    padding: 15px 0;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: orange;
+}
 
 .products {
     display: flex;
@@ -31,6 +59,14 @@ button {
 
 <body>
 
+<nav>
+  <a href="index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="cart.html">Cart</a>
+  <a href="checkout.html">Checkout</a>
+  <a href="brand.html">Brand</a>
+</nav>
+
 <h1 style="text-align:center;">Our Products</h1>
 
 <div class="products">
@@ -48,8 +84,6 @@ button {
 </div>
 
 </div>
-
-<a href="cart.html">Go to Cart</a>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
