@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cart — Habib Shop</title>
+  <style>
+    body { background:#111; color:#fff; font-family:Arial, sans-serif; margin:0; padding:20px }
+    h1{ text-align:center }
+    .items{max-width:720px;margin:16px auto;display:flex;flex-direction:column;gap:12px}
+    .item{background:#1b1b1b;padding:12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+    .muted{color:#cfcfcf}
+    .actions{max-width:720px;margin:18px auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .btn{background:orange;color:#000;padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
+    .link{color:orange;text-decoration:none}
+  </style>
+</head>
+<body>
+
+  <h1>Your Cart</h1>
+
+  <div class="items" id="cartItems"></div>
+
+  <div class="actions">
+    <div class="muted" id="summary">Subtotal: Rs 0 • Delivery: Rs 350</div>
+    <div>
+      <button class="btn" id="clearBtn">Clear Cart</button>
+      <a class="btn" id="checkoutBtn" href="checkout.html">Proceed to Checkout</a>
+    </div>
+  </div>
+
+<script>
+(function(){
+  // NOTE: This cart uses the localStorage key "cart" to match the simple shop page.
+  // If you prefer the main app's key ("habib_cart"), change the key below and in other files.
+  const KEY = 'cart';
+  const DELIVERY = 350;
+
+  let cart = JSON.parse(localStorage.getItem(KEY) || '[]');
+  const container = document.getElementById('cartItems');
+  const summary = document.getElementById('summary');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function render(){
+    container.innerHTML = '';
+    if(!cart || cart.length === 0){
+      container.innerHTML = '<p style="text-align:center;color:#cfcfcf">Your cart is empty.</p>';
+      summary.textContent = `Subtotal: Rs 0 • Delivery: Rs ${DELIVERY}`;
+      return;
+    }
+
+    let subtotal = 0;
+    cart.forEach((item, idx) => {
+      subtotal += (item.price||0) * (item.qty||1);
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML = `
+        <div>
+          <div style="font-weight:600">${escapeHtml(item.name || 'Unnamed')}</div>
+          <div class="muted">Rs ${item.price} ${item.qty? '× '+item.qty : ''}</div>
+        </div>
+        <div>
+          <button data-idx="${idx}" class="remove" style="background:transparent;border:1px solid #444;color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer">Remove</button>
+        </div>`;
+      container.appendChild(div);
+    });
+
+    const total = subtotal + DELIVERY;
+    summary.textContent = `Subtotal: Rs ${subtotal} • Delivery: Rs ${DELIVERY} • Total: Rs ${total}`;
+
+    // attach remove handlers
+    container.querySelectorAll('.remove').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const i = +e.currentTarget.dataset.idx;
+        cart.splice(i,1);
+        localStorage.setItem(KEY, JSON.stringify(cart));
+        render();
+      });
+    });
+  }
+
+  clearBtn.addEventListener('click', ()=>{
+    if(confirm('Clear all items from cart?')){
+      cart = [];
+      localStorage.removeItem(KEY);
+      render();
+    }
+  });
+
+  // basic XSS-safe escape
+  function escapeHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  render();
+})();
+</script>
+
+</body>
+</html>
