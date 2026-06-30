@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout — Habib Shop</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    main{padding:16px;max-width:720px;margin:8px auto}
+    label{display:block;margin-bottom:10px}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e9e1d9}
+    .note{background:#fff4e6;padding:8px;border-radius:8px;color:#8a5a2e;margin:8px 0}
+    .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+    .btn{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .secondary{background:#eee;color:#222}
+    .receipt{background:#fffdf8;color:#5a3f2d;padding:12px;border-radius:8px;margin-top:12px;white-space:pre-wrap;font-family:monospace}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">Habib Shop</div>
+    <nav>
+      <a href="index.html" class="nav-link">Shop</a>
+      <a href="brand.html" class="nav-link">Our Story</a>
+      <a href="faq.html" class="nav-link">FAQ</a>
+      <a href="reviews.html" class="nav-link">Reviews</a>
+      <a href="cart.html" class="nav-link">Cart</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Checkout</h1>
+    <p class="note">Delivery available only within Karachi</p>
+
+    <form id="checkoutForm">
+      <label>Full Name
+        <input type="text" id="fullname" required>
+      </label>
+      <label>Phone (Primary)
+        <input type="tel" id="phone1" required>
+      </label>
+      <label>Phone (Secondary - required)
+        <input type="tel" id="phone2" required>
+      </label>
+      <label>Address (Karachi only)
+        <textarea id="address" required placeholder="Area / Street / House # — Karachi"></textarea>
+      </label>
+
+      <div class="actions">
+        <button type="button" id="placeOrderBtn" class="btn">Place Order</button>
+      </div>
+    </form>
+
+    <div id="statusArea"></div>
+  </main>
+
+  <!-- html2canvas for saving receipt -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+  <script>
+  (function(){
+    const DELIVERY = 350;
+    const WA_NUMBER = '923162542066'; // shop WhatsApp number — change if needed
+    // support both cart keys
+    const CART_KEYS = ['habib_cart','cart'];
+
+    function getCart(){
+      for(const k of CART_KEYS){
+        const raw = localStorage.getItem(k);
+        if(raw){ try { const c = JSON.parse(raw); if(Array.isArray(c)) return {items:c,key:k}; } catch(e){} }
+      }
+      return {items:[],key:CART_KEYS[1]};
+    }
+
+    function saveCustomer(c){ localStorage.setItem('customer', JSON.stringify(c)); }
+
+    function escapeText(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    function buildReceipt(order){
+      const lines = [];
+      lines.push('🧾 Habib Shop — Order Receipt');
+      lines.push('Order ID: ' + order.id);
+      lines.push('--------------------------------');
+      order.items.forEach(it=>{
+        lines.push(`${it.name} x ${it.qty} — Rs ${it.price*it.qty}`);
+      });
+      lines.push('--------------------------------');
+      lines.push(`Subtotal: Rs ${order.subtotal}`);
+      lines.push(`Delivery: Rs ${order.delivery}`);
+      lines.push(`Total: Rs ${order.total}`);
+      lines.push('--------------------------------');
+      lines.push('Customer:');
+      lines.push(`Name: ${order.name}`);
+      lines.push(`Phone: ${order.ph1} / ${order.ph2}`);
+      lines.push(`Address: ${order.addr}`);
+      lines.push('');
+      lines.push('Thank you for your trust! Your order will be delivered within 2–3 working days.');
+      return lines.join('\n');
+    }
+
+    function renderStatusLoading(){
+      const area = document.getElementById('statusArea');
+      area.innerHTML = `<p class="note">Placing your order…</p>`;
+    }
+
+    function renderReceipt(order){
+      const area = document.getElementById('statusArea');
+      const receiptText = buildReceipt(order);
+      area.innerHTML = `
+        <div class="receipt" id="receiptBlock">${escapeText(receiptText)}</div>
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:flex-end">
+          <button id="downloadBtn" class="btn secondary">Save Receipt</button>
+          <button id="waBtn" class="btn">Send Order via WhatsApp</button>
+        </div>
+        <p class="small" style="margin-top:8px;color:#7a5a40">Please take a screenshot of this receipt</p>
+      `;
+
+      // wire buttons
+      document.getElementById('waBtn').addEventListener('click', ()=>{
+        const txt = buildReceipt(order);
+        const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(txt)}`;
+        window.open(url,'_blank');
+      });
+
+      document.getElementById('downloadBtn').addEventListener('click', ()=>{
+        const node = document.getElementById('receiptBlock');
+        html2canvas(node, {backgroundColor: null}).then(canvas=>{
+          const link = document.createElement('a');
+          link.download = `habib-receipt-${order.id}.png`;
+          link.href = canvas.toDataURL();
+          link.click();
+        }).catch(err=>{ console.error(err); alert('Could not generate image.'); });
+      });
+    }
+
+    document.getElementById('placeOrderBtn').addEventListener('click', ()=>{
+      const name = document.getElementById('fullname').value.trim();
+      const ph1 = document.getElementById('phone1').value.trim();
+      const ph2 = document.getElementById('phone2').value.trim();
+      const addr = document.getElementById('address').value.trim();
+
+      if(!name || !ph1 || !ph2 || !addr){ alert('Please fill all required fields.'); return; }
+      if(!/karachi/i.test(addr)){ alert('Delivery available only within Karachi. Please enter an address in Karachi.'); return; }
+
+      const cartRes = getCart();
+      if(!cartRes.items || cartRes.items.length===0){ alert('Your cart is empty.'); return; }
+
+      // save customer for receipt
+      const customer = {name,phone:ph1,phone2:ph2,address:addr};
+      saveCustomer(customer);
+
+      renderStatusLoading();
+
+      setTimeout(()=>{
+        const items = cartRes.items.map(it=>({ name: it.name||it.title||'Item', price: Number(it.price)||0, qty: it.qty||1 }));
+        const subtotal = items.reduce((s,i)=>s + i.price*i.qty,0);
+        const order = {
+          id: 'HB'+Date.now(),
+          name,ph1,ph2,addr,
+          items, subtotal, delivery: DELIVERY, total: subtotal + DELIVERY
+        };
+
+        // clear cart
+        // remove both keys
+        CART_KEYS.forEach(k=>localStorage.removeItem(k));
+        // store last order
+        localStorage.setItem('last_order', JSON.stringify(order));
+        window.__LAST_ORDER = order;
+
+        renderReceipt(order);
+      },1200);
+    });
+
+  })();
+  </script>
+</body>
+</html>
