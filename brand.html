@@ -1,142 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brand History — Habib Shop</title>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
-
-<style>
-/* Page-specific overrides for the timeline (keeps mobile-first) */
-body { 
-    margin: 0;
-    background: #111; 
-    color: #fff; 
-    font-family: 'Poppins', sans-serif; 
-}
-
-/* NAVIGATION */
-nav {
-    background: #222;
-    padding: 15px 0;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 20px;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: orange;
-}
-
-.section { padding: 48px 6%; position: relative; }
-.timeline { border-left: 4px solid #f97316; margin-left: 12px; padding-left: 20px; }
-.card { margin-bottom: 48px; opacity: 0; transform: translateY(40px); transition: 700ms ease; }
-.card.show { opacity: 1; transform: translateY(0); }
-.year { font-size: 40px; font-weight: 700; color: #f97316; margin-bottom: 10px; }
-.text { line-height: 1.8; font-size: 16px; color: #f3e9e2; }
-.image { margin-top: 12px; overflow: hidden; border-radius:10px; }
-.image img { width: 100%; display:block; transform: scale(1.12); transition: 900ms ease; border-radius:8px; }
-.card.show img { transform: scale(1); }
-.hero { height: 60vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('your-banner.jpg'); background-size: cover; display:flex; align-items:center; justify-content:center; }
-.hero h1 { font-size: 36px; color: #f97316; margin:0; }
-@media(min-width:700px){ .hero{height:70vh}.year{font-size:50px}.section{padding:80px 10%} }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Habibs Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="cart.html">Cart</a>
-  <a href="checkout.html">Checkout</a>
-  <a href="brand.html">Brand</a>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-    <h1>Our Legacy</h1>
-</div>
-
-<!-- TIMELINE -->
-<div class="section">
-    <div class="timeline">
-
-        <!-- 1960 -->
-        <div class="card">
-            <div class="year">1960</div>
-            <div class="text">
-                In 1952, a young boy crossed into Pakistan with his father, carrying tradition instead of belongings. 
-                After his father's passing, he moved to Karimabad, Karachi.  
-                In 1965, he opened a small shop with his mother's secret achar recipe.  
-                This became the foundation of Habib Bhai Achar Waley.
-            </div>
-            <div class="image">
-                <img src="founder.jpg" alt="Founder">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-store"></i> Habibs Shop
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count" class="cart-badge">0</span></a></li>
+                    <li><a href="brand.html" class="active">About Us</a></li>
+                    <li><a href="checkout.html"><i class="fas fa-credit-card"></i> Checkout</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </div>
+    </nav>
 
-        <!-- 2000 -->
-        <div class="card">
-            <div class="year">2000</div>
-            <div class="text">
-                The aroma of spices filled the streets of Karimabad.  
-                The shop became famous for its bold and traditional taste.  
-                His son joined, preserving every ritual and recipe.  
-                The brand became a symbol of heritage and authenticity.
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h1>About Habibs Shop</h1>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2><i class="fas fa-building"></i> Welcome to Our Store</h2>
+                    <p>Habibs Shop is a premium online retail destination dedicated to bringing you the finest quality products at unbeatable prices. Founded with a passion for excellence, we've been serving customers with dedication and integrity.</p>
+                    
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>To provide customers with access to high-quality products, exceptional customer service, and a seamless shopping experience online. We believe in transparency, fairness, and customer satisfaction.</p>
+                    
+                    <h3><i class="fas fa-star"></i> Our Vision</h3>
+                    <p>To become the most trusted and preferred online shopping destination for premium products in the region, known for our quality, service, and reliability.</p>
+                    
+                    <h3><i class="fas fa-heart"></i> Why Choose Us?</h3>
+                    <ul class="about-list">
+                        <li><i class="fas fa-check"></i> 100% Authentic Products</li>
+                        <li><i class="fas fa-check"></i> Quality Assurance Guarantee</li>
+                        <li><i class="fas fa-check"></i> Fast and Reliable Delivery</li>
+                        <li><i class="fas fa-check"></i> Competitive Pricing</li>
+                        <li><i class="fas fa-check"></i> 24/7 WhatsApp Support</li>
+                        <li><i class="fas fa-check"></i> Easy Returns & Exchange</li>
+                        <li><i class="fas fa-check"></i> Secure Payment Options</li>
+                        <li><i class="fas fa-check"></i> Money Back Guarantee</li>
+                    </ul>
+                </div>
             </div>
-            <div class="image">
-                <img src="shop.jpg" alt="Shop">
+
+            <!-- Values Section -->
+            <div class="values-section">
+                <h2>Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-heart"></i>
+                        <h3>Customer First</h3>
+                        <p>Your satisfaction is our top priority in everything we do</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-star"></i>
+                        <h3>Quality</h3>
+                        <p>Only the best products reach our shelves</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Trust</h3>
+                        <p>Honest business practices and transparency always</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Innovation</h3>
+                        <p>Continuously improving our service and experience</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <h2><i class="fas fa-phone"></i> Get in Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p>Quick replies & instant support for all queries</p>
+                        <a href="https://wa.me/923001234567" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Message Us</a>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Phone</h3>
+                        <p>Call us for immediate assistance</p>
+                        <a href="tel:+923001234567" class="btn btn-primary"><i class="fas fa-phone"></i> Call Us</a>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email</h3>
+                        <p>Send us your questions or feedback</p>
+                        <a href="mailto:info@habibsshop.com" class="btn btn-primary"><i class="fas fa-envelope"></i> Email Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h2>By The Numbers</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Authentic Products</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Premium Brands</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Customer Support</div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <!-- 2025 -->
-        <div class="card">
-            <div class="year">2025</div>
-            <div class="text">
-                The grandsons expanded the brand across Karachi and beyond.  
-                From Daraz to international markets, the legacy grew stronger.  
-                Today, the next generation continues the tradition with pride.
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Habibs Shop</h4>
+                    <p>Your trusted online shopping destination for premium products.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="checkout.html">Checkout</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/923001234567" target="_blank">WhatsApp: +92 300 1234567</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@habibsshop.com">Email: info@habibsshop.com</a></p>
+                </div>
             </div>
-            <div class="image">
-                <img src="modern.jpg" alt="Modern Brand">
+            <div class="footer-bottom">
+                <p>&copy; 2024 Habibs Shop. All rights reserved.</p>
             </div>
         </div>
+    </footer>
 
-    </div>
-</div>
-
-<script>
-// SCROLL ANIMATION
-const cards = document.querySelectorAll('.card');
-
-function checkCards(){
-  const trigger = window.innerHeight * 0.85;
-  cards.forEach(card => {
-    const top = card.getBoundingClientRect().top;
-    if (top < trigger) card.classList.add('show');
-  });
-}
-
-window.addEventListener('scroll', checkCards);
-window.addEventListener('load', checkCards);
-
-// Cart button opens existing cart modal if present
-const cartBtn = document.getElementById('cartBtn');
-if(cartBtn){cartBtn.addEventListener('click', ()=>{ const cm = document.getElementById('cartModal'); if(cm) cm.classList.remove('hidden'); }); }
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>

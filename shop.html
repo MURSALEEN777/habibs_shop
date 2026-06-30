@@ -1,99 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Shop</title>
-
-<style>
-body { 
-    margin: 0;
-    font-family: Arial; 
-    background:#111; 
-    color:white;
-}
-
-/* NAVIGATION */
-nav {
-    background: #222;
-    padding: 15px 0;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 20px;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: orange;
-}
-
-.products {
-    display: flex;
-    gap: 20px;
-    padding: 40px;
-}
-
-.card {
-    background:#222;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-}
-
-button {
-    background: orange;
-    border:none;
-    padding:10px;
-    cursor:pointer;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Habibs Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-store"></i> Habibs Shop
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html" class="active">Shop</a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count" class="cart-badge">0</span></a></li>
+                    <li><a href="brand.html">About Us</a></li>
+                    <li><a href="checkout.html"><i class="fas fa-credit-card"></i> Checkout</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="cart.html">Cart</a>
-  <a href="checkout.html">Checkout</a>
-  <a href="brand.html">Brand</a>
-</nav>
+    <!-- Shop Section -->
+    <section class="shop">
+        <div class="container">
+            <h1>Our Products</h1>
+            
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label><i class="fas fa-filter"></i> Filter by Category:</label>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="accessories">Accessories</option>
+                        <option value="beauty">Beauty</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label><i class="fas fa-sort"></i> Sort by:</label>
+                    <select id="sortFilter">
+                        <option value="name">Name (A-Z)</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
 
-<h1 style="text-align:center;">Our Products</h1>
+            <!-- Products Grid -->
+            <div class="products-grid" id="productsGrid">
+                <!-- Products loaded from JavaScript -->
+            </div>
+        </div>
+    </section>
 
-<div class="products">
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div id="modalImage"></div>
+                <div class="modal-info">
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDesc"></p>
+                    <div class="modal-details">
+                        <p><strong>Price:</strong> <span id="modalPrice"></span></p>
+                        <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+                    </div>
+                    <div class="modal-actions">
+                        <div class="quantity-selector">
+                            <button id="decreaseQty"><i class="fas fa-minus"></i></button>
+                            <input type="number" id="quantity" value="1" min="1">
+                            <button id="increaseQty"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <button class="btn btn-primary" id="addToCartBtn">Add to Cart</button>
+                        <button class="btn btn-whatsapp" id="orderWhatsAppBtn"><i class="fab fa-whatsapp"></i> Order on WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="card">
-    <h2>Mango Achar</h2>
-    <p>Rs 500</p>
-    <button onclick="addToCart('Mango Achar',500)">Add to Cart</button>
-</div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Habibs Shop</h4>
+                    <p>Your trusted online shopping destination for premium products.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="brand.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/923001234567" target="_blank">WhatsApp: +92 300 1234567</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@habibsshop.com">Email: info@habibsshop.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Habibs Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-<div class="card">
-    <h2>Lemon Achar</h2>
-    <p>Rs 400</p>
-    <button onclick="addToCart('Lemon Achar',400)">Add to Cart</button>
-</div>
-
-</div>
-
-<script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function addToCart(name, price){
-    cart.push({name, price});
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Added to cart!");
-}
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>

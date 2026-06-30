@@ -168,6 +168,33 @@ body {
     margin-bottom: 10px;
 }
 
+/* CTA Section */
+.cta-section {
+    background: linear-gradient(135deg, var(--accent-color) 0%, #20ba5a 100%);
+    color: var(--white);
+    padding: 60px 20px;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.cta-content h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.cta-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 /* Featured Products */
 .featured {
     padding: 60px 20px;
@@ -344,6 +371,10 @@ body {
     gap: 20px;
     margin-bottom: 40px;
     flex-wrap: wrap;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
 }
 
 .filter-group {
@@ -734,6 +765,9 @@ body {
 .about-list {
     list-style: none;
     margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .about-list li {
@@ -747,7 +781,7 @@ body {
 }
 
 .values-section {
-    padding: 40px 0;
+    padding: 40px;
     background: var(--light-bg);
     border-radius: 8px;
     margin-bottom: 60px;
@@ -764,7 +798,6 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    padding: 0 20px;
 }
 
 .value-card {
@@ -795,6 +828,7 @@ body {
     background: var(--light-bg);
     padding: 40px;
     border-radius: 8px;
+    margin-bottom: 60px;
 }
 
 .contact-section h2 {
@@ -832,6 +866,45 @@ body {
 .contact-card p {
     color: #666;
     margin-bottom: 15px;
+}
+
+/* Stats Section */
+.stats-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    color: var(--white);
+    padding: 40px;
+    border-radius: 8px;
+    margin-bottom: 60px;
+}
+
+.stats-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 16px;
+    opacity: 0.9;
 }
 
 /* Footer */
@@ -952,8 +1025,9 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .values-grid {
-        grid-template-columns: 1fr;
+    .values-grid,
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
     }
 
     .featured h2,
@@ -962,6 +1036,14 @@ body {
     .checkout-section h1,
     .about h1 {
         font-size: 24px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .filters {
+        flex-direction: column;
     }
 }
 
@@ -989,5 +1071,14 @@ body {
     .btn {
         padding: 10px 20px;
         font-size: 14px;
+    }
+
+    .about-list {
+        grid-template-columns: 1fr;
+    }
+
+    .values-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
     }
 }

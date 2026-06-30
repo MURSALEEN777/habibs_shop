@@ -1,156 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cart — Habib Shop</title>
-  <style>
-    body { 
-        background:#111; 
-        color:#fff; 
-        font-family:Arial, sans-serif; 
-        margin:0; 
-        padding:20px;
-    }
-    
-    /* NAVIGATION */
-    nav {
-        background: #222;
-        padding: 15px 0;
-        text-align: center;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-        margin: -20px -20px 20px -20px;
-    }
-
-    nav a {
-        color: white;
-        text-decoration: none;
-        margin: 0 20px;
-        font-size: 16px;
-        transition: 0.3s;
-    }
-
-    nav a:hover {
-        color: orange;
-    }
-    
-    h1{ text-align:center }
-    .items{max-width:720px;margin:16px auto;display:flex;flex-direction:column;gap:12px}
-    .item{background:#1b1b1b;padding:12px;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
-    .muted{color:#cfcfcf}
-    .actions{max-width:720px;margin:18px auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
-    .btn{background:orange;color:#000;padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
-    .link{color:orange;text-decoration:none}
-    .small{font-size:13px;color:#cfcfcf}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - Habibs Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="cart.html">Cart</a>
-    <a href="checkout.html">Checkout</a>
-    <a href="brand.html">Brand</a>
-  </nav>
-
-  <h1>Your Cart</h1>
-
-  <div class="items" id="cartItems"></div>
-
-  <div class="actions">
-    <div class="muted" id="summary">Subtotal: Rs 0 • Delivery: Rs 350</div>
-    <div>
-      <button class="btn" id="clearBtn">Clear Cart</button>
-      <a class="btn" id="checkoutBtn" href="checkout.html">Proceed to Checkout</a>
-    </div>
-  </div>
-
-<script>
-(function(){
-  // Try both keys for compatibility: prefer the main app key 'habib_cart' if present
-  const KEYS = ['habib_cart','cart'];
-  const DELIVERY = 350;
-
-  let cart = [];
-  for (const k of KEYS) {
-    const data = localStorage.getItem(k);
-    if (data) { try { cart = JSON.parse(data); break; } catch(e){ /*ignore*/ } }
-  }
-
-  // Ensure cart is an array
-  if (!Array.isArray(cart)) cart = [];
-
-  const container = document.getElementById('cartItems');
-  const summary = document.getElementById('summary');
-  const clearBtn = document.getElementById('clearBtn');
-
-  function escapeHtml(s){
-    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-
-  function saveCart(){
-    // Save back to the first available key (or 'cart' by default)
-    const saveKey = KEYS.find(k => localStorage.getItem(k) !== null) || KEYS[1];
-    localStorage.setItem(saveKey, JSON.stringify(cart));
-  }
-
-  function render(){
-    container.innerHTML = '';
-    if(!cart || cart.length === 0){
-      container.innerHTML = '<p style="text-align:center;color:#cfcfcf">Your cart is empty.</p>';
-      summary.textContent = `Subtotal: Rs 0 • Delivery: Rs ${DELIVERY}`;
-      return;
-    }
-
-    let subtotal = 0;
-    cart.forEach((item, idx) => {
-      const qty = item.qty && item.qty > 0 ? item.qty : 1;
-      const lineTotal = (Number(item.price) || 0) * qty;
-      subtotal += lineTotal;
-
-      const div = document.createElement('div');
-      div.className = 'item';
-      div.innerHTML = `
-        <div>
-          <div style="font-weight:600">${escapeHtml(item.name || 'Unnamed')}</div>
-          <div class="small">Rs ${escapeHtml(String(item.price || 0))} ${qty ? '× '+qty : ''}</div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-store"></i> Habibs Shop
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="cart.html" class="active"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count" class="cart-badge">0</span></a></li>
+                    <li><a href="brand.html">About Us</a></li>
+                    <li><a href="checkout.html"><i class="fas fa-credit-card"></i> Checkout</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
-        <div>
-          <button data-idx="${idx}" class="remove" style="background:transparent;border:1px solid #444;color:#fff;padding:6px 8px;border-radius:6px;cursor:pointer">Remove</button>
-        </div>`;
-      container.appendChild(div);
-    });
+    </nav>
 
-    const total = subtotal + DELIVERY;
-    summary.textContent = `Subtotal: Rs ${subtotal} • Delivery: Rs ${DELIVERY} • Total: Rs ${total}`;
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            
+            <div class="cart-wrapper">
+                <div class="cart-items" id="cartItems">
+                    <!-- Cart items loaded from JavaScript -->
+                </div>
+                
+                <div class="cart-summary">
+                    <h2>Order Summary</h2>
+                    <div class="summary-item">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">Rs. 0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Shipping:</span>
+                        <span id="shipping">Rs. 200</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total:</span>
+                        <span id="total">Rs. 0</span>
+                    </div>
+                    <button class="btn btn-primary btn-block" id="checkoutBtn">Proceed to Checkout</button>
+                    <button class="btn btn-whatsapp btn-block" id="cartWhatsAppBtn"><i class="fab fa-whatsapp"></i> Order on WhatsApp</button>
+                    <a href="shop.html" class="btn btn-secondary btn-block">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // remove handlers
-    container.querySelectorAll('.remove').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const i = +e.currentTarget.dataset.idx;
-        cart.splice(i,1);
-        saveCart();
-        render();
-      });
-    });
-  }
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Habibs Shop</h4>
+                    <p>Your trusted online shopping destination for premium products.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="brand.html">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fab fa-whatsapp"></i> <a href="https://wa.me/923001234567" target="_blank">WhatsApp: +92 300 1234567</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@habibsshop.com">Email: info@habibsshop.com</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Habibs Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  clearBtn.addEventListener('click', ()=>{
-    if(confirm('Clear all items from cart?')){
-      cart = [];
-      // remove both keys for cleanliness
-      KEYS.forEach(k => localStorage.removeItem(k));
-      render();
-    }
-  });
-
-  render();
-})();
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
