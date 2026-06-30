@@ -45,9 +45,15 @@
     <!-- Featured Products -->
     <section class="featured">
         <div class="container">
-            <h2>Featured Products</h2>
+            <div class="featured-header">
+                <h2>Featured Products</h2>
+                <a href="shop.html" class="view-all-btn">View All Products <i class="fas fa-arrow-right"></i></a>
+            </div>
             <div class="products-grid" id="featuredProducts">
                 <!-- Products loaded from JavaScript -->
+            </div>
+            <div class="featured-footer">
+                <a href="shop.html" class="btn btn-primary btn-lg">Shop All Products</a>
             </div>
         </div>
     </section>
@@ -81,6 +87,35 @@
         </div>
     </section>
 
+    <!-- Categories Preview -->
+    <section class="categories-preview">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div class="categories-grid">
+                <a href="shop.html?category=electronics" class="category-card" onclick="filterByCategory('electronics')">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Electronics</h3>
+                    <p>Latest gadgets & devices</p>
+                </a>
+                <a href="shop.html?category=clothing" class="category-card" onclick="filterByCategory('clothing')">
+                    <i class="fas fa-shirt"></i>
+                    <h3>Clothing</h3>
+                    <p>Trendy & comfortable wear</p>
+                </a>
+                <a href="shop.html?category=accessories" class="category-card" onclick="filterByCategory('accessories')">
+                    <i class="fas fa-ring"></i>
+                    <h3>Accessories</h3>
+                    <p>Stylish add-ons</p>
+                </a>
+                <a href="shop.html?category=beauty" class="category-card" onclick="filterByCategory('beauty')">
+                    <i class="fas fa-spa"></i>
+                    <h3>Beauty</h3>
+                    <p>Premium beauty products</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
@@ -88,7 +123,7 @@
                 <h2>Ready to Shop?</h2>
                 <p>Browse our amazing collection of premium products</p>
                 <div class="cta-buttons">
-                    <a href="shop.html" class="btn btn-primary">Browse Products</a>
+                    <a href="shop.html" class="btn btn-primary">Browse All Products</a>
                     <a href="https://wa.me/923001234567" target="_blank" class="btn btn-whatsapp">
                         <i class="fab fa-whatsapp"></i> Chat on WhatsApp
                     </a>
@@ -108,6 +143,7 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="shop.html">Shop</a></li>
                         <li><a href="cart.html">Cart</a></li>
                         <li><a href="brand.html">About</a></li>
