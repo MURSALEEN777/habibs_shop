@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shop</title>
+
+<style>
+body { font-family: Arial; background:#111; color:white; }
+
+.products {
+    display: flex;
+    gap: 20px;
+    padding: 40px;
+}
+
+.card {
+    background:#222;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+button {
+    background: orange;
+    border:none;
+    padding:10px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1 style="text-align:center;">Our Products</h1>
+
+<div class="products">
+
+<div class="card">
+    <h2>Mango Achar</h2>
+    <p>Rs 500</p>
+    <button onclick="addToCart('Mango Achar',500)">Add to Cart</button>
+</div>
+
+<div class="card">
+    <h2>Lemon Achar</h2>
+    <p>Rs 400</p>
+    <button onclick="addToCart('Lemon Achar',400)">Add to Cart</button>
+</div>
+
+</div>
+
+<a href="cart.html">Go to Cart</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name, price){
+    cart.push({name, price});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Added to cart!");
+}
+</script>
+
+</body>
+</html>
