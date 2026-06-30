@@ -6,6 +6,36 @@
   <title>Checkout — Habib Shop</title>
   <link rel="stylesheet" href="css/styles.css">
   <style>
+    body {
+        margin: 0;
+        background: #111;
+        color: #fff;
+        font-family: Arial, sans-serif;
+    }
+
+    /* NAVIGATION */
+    nav {
+        background: #222;
+        padding: 15px 0;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        color: orange;
+    }
+
     main{padding:16px;max-width:720px;margin:8px auto}
     label{display:block;margin-bottom:10px}
     input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e9e1d9}
@@ -17,16 +47,14 @@
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="logo">Habib Shop</div>
-    <nav>
-      <a href="index.html" class="nav-link">Shop</a>
-      <a href="brand.html" class="nav-link">Our Story</a>
-      <a href="faq.html" class="nav-link">FAQ</a>
-      <a href="reviews.html" class="nav-link">Reviews</a>
-      <a href="cart.html" class="nav-link">Cart</a>
-    </nav>
-  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="cart.html">Cart</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="brand.html">Brand</a>
+  </nav>
 
   <main>
     <h1>Checkout</h1>
