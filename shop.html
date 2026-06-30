@@ -34,7 +34,13 @@
     <!-- Shop Section -->
     <section class="shop">
         <div class="container">
-            <h1>Our Products</h1>
+            <div class="shop-header">
+                <div>
+                    <h1>Our Products</h1>
+                    <p class="shop-subtitle">Browse our complete collection of premium products</p>
+                </div>
+                <a href="index.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            </div>
             
             <!-- Filters -->
             <div class="filters">
@@ -56,6 +62,14 @@
                         <option value="price-high">Price: High to Low</option>
                     </select>
                 </div>
+                <div class="filter-group">
+                    <button class="btn btn-secondary" onclick="clearFilters()"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+            </div>
+
+            <!-- Products Count -->
+            <div class="products-count">
+                <p>Showing <span id="productsCount">0</span> products</p>
             </div>
 
             <!-- Products Grid -->
@@ -107,6 +121,7 @@
                         <li><a href="shop.html">Shop</a></li>
                         <li><a href="cart.html">Cart</a></li>
                         <li><a href="brand.html">About</a></li>
+                        <li><a href="checkout.html">Checkout</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
